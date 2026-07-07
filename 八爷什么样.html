@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>八爷什么样 - 副官视角的回忆</title>
+    <style>
+        @font-face {
+            font-family: 'HanYiShouJin';
+            src: url('HanYiShouJinShuJian-1.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            background: #f5f0e6;
+            font-family: 'HanYiShouJin', '楷体', 'Microsoft YaHei', serif;
+            padding: 2rem;
+            text-align: center;
+        }
+        #story-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        #story-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            min-height: 200px;
+            white-space: pre-wrap;
+        }
+        #options {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            background: #8b5a2b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        button:hover {
+            background: #5a3a1a;
+        }
+        hr {
+            margin: 20px 0;
+            border: 0;
+            border-top: 1px solid #e0d6cc;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #aaa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="story-container">
+        <div id="story-text">
+            <!-- 故事文本会动态显示在这里 -->
+        </div>
+        <div id="options">
+            <!-- 按钮选项会动态生成在这里 -->
+        </div>
+        <div class="footer">—— 【副八】八爷什么样·长乐——</div>
+    </div>
+
+    <script>
+        // 故事数据：每个场景包含文本和选项
+        const scenes = {
+            // 场景0：开场
+            start: {
+                text: "八爷是什么样的人呢？传言众说纷纭，评价不一。\n\n八爷是什么样的人呢？你不止一次问过自己这个问题。",
+                options: [
+                    { text: "胆小惜命", next: "scene1" },
+                    { text: "神机妙算", next: "scene2" },
+                    { text: "脆弱无助", next: "scene3" },
+                    { text: "世故圆滑", next: "scene4" },
+                    { text: "(回忆结束)", next: "ending" },
+                ]
+            },
+            // 场景1：胆小惜命的八爷
+            scene1: {
+                text: "【你见过胆小惜命的八爷】\n\n八爷会被凶斗吓得大叫，听到“不去就一枪毙了”时，一张脸皱成个苦瓜样子，瞪了你一眼，眼神却没什么威力。\n\n你看着那张苦瓜脸，没由来地就想说:",
+                options: [
+                    { text: "“八爷放心，我定会保你平安的。”", next: "scene1a" },
+                ]
+            },
+            scene1a: {
+                text: "下到斗里，八爷直往你身后躲，像只缩在母鸡翅膀下的鸡崽。你感受到身后人的瑟缩，脚下挪了半步，又将他挡得严实了些。八爷却也会在你试图以身犯险时慌忙将你拉住：\n\n“呆瓜！你不要命啦？”",
+                options: [{ text: "(继续回忆)", next: "start" }]
+            },
+            // 场景2：神机妙算的八爷
+            scene2: {
+                text: "【你见过神机妙算的八爷】\n\n一行人被困古墓之时，八爷看着周围一圈不知通向何处的通道口，收起了平日的嬉皮笑脸，神情格外严肃，就地坐了下来，闭着眼睛，手上掐算，口中念念有词。\n\n不多时，八爷睁开眼，看向你：“生门在东南角。”那双眼中，是你从未见过的坚定，让你下意识地选择相信。你转身招呼众人：",
+                options: [
+                    { text: "“听八爷的，走。”", next: "scene2a" },
+                ]
+            },
+            scene2a: {
+                text: "在八爷的指引下，你们成功脱险。你是真心佩服他。这份本事，整个长沙城找不出第二个。",
+                options: [{ text: "(继续回忆)", next: "start" }]
+            },
+            // 场景3：脆弱无助的八爷
+            scene3: {
+                text: "【你见过脆弱无助的八爷】\n\n八爷染了风寒，你去香堂探望他时，他正发着高热，双颊通红，喝过了药迷迷糊糊地躺在榻上，像一片在寒风中颤抖的枯叶。小满在前厅招呼客人，忙不过来。你取下八爷额头上的毛巾，过了遍凉水又给他敷上。你本打算悄悄离开，让八爷安心休息。刚一起身，却被一只手勾住了衣角。\n\n“……别走……”你听到榻上人沙哑微弱的声音。",
+                options: [
+                    { text: "“好，我不走。”", next: "scene3a" },
+                ]
+            },
+            scene3a: {
+                text: "于是你真的留下来了。任由八爷抓着自己的手不放，你紧紧回握那只冰凉苍白的手，似乎这样就能把自己的生命力渡一些过去。你在榻边坐了很久，直到八爷的面色恢复，安然睡去。",
+                options: [{ text: "(继续回忆)", next: "start" }]
+            },
+            // 场景4：通透世故的八爷
+            scene4: {
+                text: "【你见过见过世故通透的八爷】\n\n你去给其他当家传话，碰了个钉子。八爷听了，笑了，抬手用扇子敲了敲你的脑袋：“呆瓜，你到人家那儿一直‘佛爷说佛爷说’，人家当然不爱听啊。”于是他带着你折回去，一张笑脸，几句话，就把事情办妥了。“看到没有，呆瓜，多跟你八爷我学着点。”",
+                options: [
+                    { text: "“是，我听八爷的。”", next: "scene4a" },
+                ]
+            },
+            scene4a: {
+                text: "看着八爷狡黠的笑，你不由得心生佩服。八爷总是这样，跟人打交道时显得那么游刃有余，脾气再难搞的人面对他也会和和气气。",
+                options: [{ text: "(继续回忆)", next: "start" }]
+            },
+            // 结尾
+            ending: {
+                text: "【此刻】\n\n所以八爷什么样呢？\n\n你推开门，八爷正在院中的躺椅上睡得正香，脑袋歪在一边，嘴角还挂着一丝口水。你摇摇头，笑了，从口袋里掏出一方干净的帕子给他擦了擦。八爷在睡梦中小声咕哝了一句什么，没醒。\n\n于是你在心里对自己说：\n\n我的八爷，就是这样。",
+                options: [
+                    { text: "(重新开始)", next: "start" }
+                ]
+            }
+        };
+
+        // 显示指定场景
+        function showScene(sceneId) {
+            const scene = scenes[sceneId];
+            if (!scene) return;
+
+            // 显示文本
+            document.getElementById('story-text').innerHTML = scene.text.replace(/\n/g, '<br>');
+
+            // 生成选项按钮
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            scene.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.textContent = opt.text;
+                btn.onclick = () => showScene(opt.next);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        // 从开场开始
+        showScene('start');
+    </script>
+</body>
+</html>
