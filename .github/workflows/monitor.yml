@@ -25,6 +25,5 @@ jobs:
           EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
           EMAIL_AUTH: ${{ secrets.EMAIL_AUTH }}
           EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
-          GIST_ID: ${{ secrets.STATE_GIST_ID }}
-          GIST_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: python3 cpp_monitor.py
