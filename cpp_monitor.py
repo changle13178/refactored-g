@@ -21,7 +21,12 @@ def get_state():
     if r.status_code == 200:
         d = r.json()
         content = base64.b64decode(d["content"]).decode("utf-8")
-        return json.loads(content), d["sha"]
+        try:
+            state = json.loads(content)
+            if state and "key" in state:
+                return state, d["sha"]
+        except Exception:
+            pass
     return None, None
 
 def save_state(state, sha):
